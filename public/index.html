@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MidMe - The new meeting app that will rock your world! </title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- CSS 
+        ================================================== -->
+    <!-- Bootstrap 3-->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic|Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Template Styles -->
+        		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+    <link href="css/style.css" rel="stylesheet" media="screen">
+    		<script src="js/modernizr.custom.js"></script>
+
+      </head>
+  <body>
+
+
+
+	  <nav class="navbar navbar-default" role="navigation">
+	  	  <div class="container">
+			  <div class="navbar-header">
+    
+			    <!--Replace text with your app name or logo image-->
+			    <a class="navbar-brand" href="#">MidMe <!-- <img class="logo" src="/img/logo-play.png"></img> --></a>
+			    
+			  </div>
+			  <div class="collapse navbar-collapse navbar-ex1-collapse">
+			    <ul class="nav navbar-nav">
+			      <li><a onclick="$('.main').animatescroll({padding:71});">Home</a></li>
+			      <li><a onclick="$('.register').animatescroll({padding:71});">Register</a></li>
+			    </ul>
+			  </div>
+		  </div>
+	  </nav>
+	  
+	  
+	  
+	  <!-- MAIN 
+	      ================================================== -->
+
+	  <section class="main">
+		<div class="container">
+			  <div class="row">
+				  <div class="col-md-10 col-md-offset-1">
+				  	  <h1>MidMe</h1>
+					  <h2>The easiest way to meet your friends</h2>
+					  <p>Are you sick of seeing Aris face every day? Do you want to do something about it? 
+					  	 Download our application and your life is going to change rapidly </p>
+					  <iframe width="640" height="360" src="//www.youtube.com/embed/EeU_dc8VcDQ?controls=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
+				  </div>
+			  </div>
+		  </div>	  
+	  </section>
+	  
+	  
+
+	  
+	  <!-- REGISTER
+	      ================================================== -->
+	  <section class="register">
+		  <div class="container">
+			  <div class="row">
+				  <div class="col-md-offset-2 col-md-8">
+					 <h1>Register if you want to know more</h1>
+					 	<p class="col-md-12">we will send you our naked asses</p>
+					 	
+					<form id="theForm" class="simform" autocomplete="off" action="action = '/register'" method="get">
+					<div class="simform-inner">
+						<ol class="questions">
+							<li>
+								<span><label for="q1">What's your name?</label></span>
+								<input id="username" name="q1" type="text"/>
+							</li>
+							<li>
+								<span><label for="q2">What's your email?</label></span>
+								<input id="email" name="q2" type="text"/>
+							</li>
+						</ol><!-- /questions -->
+						<button class="submit" type="submit">Send answers</button>
+						<div class="controls">
+							<button class="next"></button>
+							<div class="progress"></div>
+							<span class="number">
+								<span class="number-current"></span>
+								<span class="number-total"></span>
+							</span>
+							<span class="error-message"></span>
+						</div><!-- / controls -->
+					</div><!-- /simform-inner -->
+					<span class="final-message"></span>
+				</form><!-- /simform -->			
+				  </div>
+
+			  </div>
+			  <div class="col-md-12 barline">
+	  				<hr />
+		  			<ul>
+	                	<li><a href="mailto:info@midme.com">Contact</a></li>
+	                	<li><a href="#link-here">Facebook</a></li>
+	                	<li><a href="#link-here">Twitter</a></li>
+	                	<li><a href="#link-here">Developers</a></li>
+	                	<li><a href="#link-here">Privacy</a></li>
+                	</ul>
+	  			</div>
+		  </div>
+	  </section>
+	  
+	  
+
+	 
+	 <!-- JAVASCRIPT
+	     ================================================== -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/animatescroll.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/retina-1.1.0.min.js"></script>
+    		<script src="js/classie.js"></script>
+		<script src="js/stepsForm.js"></script>
+		<script>
+			var theForm = document.getElementById( 'theForm' );
+
+			new stepsForm( theForm, {
+				onSubmit : function( form ) {
+					// hide form
+					classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
+					
+					var username = $("#username").val();
+					var email = $("#email").val();
+					data = {
+							'user':username,
+							'email':email,
+							};
+
+		            $.ajax({
+			            url: '/items',
+			            type: 'POST',
+			            dataType: 'json',
+			            data: data ,
+			            success: function(){
+			                console.log('yes');
+			            }
+				    }); 
+
+					// let's just simulate something...
+					var messageEl = theForm.querySelector( '.final-message' );
+					messageEl.innerHTML = 'Thank you! We\'ll be in touch.';
+					classie.addClass( messageEl, 'show' );
+				}
+			} );
+		</script>
+  	
+</html>
